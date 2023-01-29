@@ -52,13 +52,13 @@ impl DepsFetcher {
             println!("Fetching {} ...", dep);
             futures.push(
                 self.client
-                    .recv_json(surf::get(&format!("{}{}/{}", self.registry, path, dep))),
+                    .recv_json(surf::get(format!("{}{}/{}", self.registry, path, dep))),
             );
             concurrency += 1;
         }
         result.append(&mut futures_util::future::join_all(futures.into_iter()).await);
 
-        if deps.len() > 0 {
+        if !deps.is_empty() {
             let d = Duration::from_secs(Self::THROTTLE_SECONDS);
             thread::sleep(d);
             self.buffering_fetch_all(path, deps, result).await;

@@ -5,7 +5,7 @@ pub(super) struct DependencyContent {
 }
 
 impl DependencyContent {
-    pub(super) fn to_string(self) -> String {
+    pub(super) fn into_string(self) -> String {
         format!(
             "{}{}{}",
             self.name,

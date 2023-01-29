@@ -57,12 +57,12 @@ struct ExpectJson {
 
 async fn generate_deps_content(deps: &BTreeMap<String, Dependency>, title: String) -> String {
     let mut names = VecDeque::new();
-    for (name, _) in deps {
+    for name in deps.keys() {
         names.push_back(name.clone());
     }
 
     let label = title.replace(r"# ", "");
-    let label = label.replace("#", "");
+    let label = label.replace('#', "");
 
     println!("===== Start fetching {} =====", label);
 
@@ -79,8 +79,8 @@ async fn generate_deps_content(deps: &BTreeMap<String, Dependency>, title: Strin
             description: item.crate_.description,
             repository: item.crate_.repository,
         }
-        .to_string();
-        let content = content.replace("\n", " ");
+        .into_string();
+        let content = content.replace('\n', " ");
         contents.push(format!("- {}", content));
     }
 
