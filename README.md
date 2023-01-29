@@ -1,5 +1,44 @@
 # thanks-dependencies
 
+This generates list of dependencies.
+
+I think it's better to publish dependencies explicitly on documentation. Of course users can refer dependencies from `Cargo.toml`, but almost users don't interest for what's library used.
+
+So publishing dependencies explicitly forces users to look at these, and it can advertize these. Additionally it should be motivation for continuing maintenance.
+
+To do this, we need to search dependencies and write information manually, but it's really stressful.
+
+So this tool automate these task. And it generates [Thanks for the following dependencies](#Thanks-for-the-following-dependencies).
+
+## Installation
+
+```sh
+$ cargo install thanks-dependencies
+```
+
+## Usage
+
+Only run command as follows.
+
+```sh
+$ thanks-dependencies
+```
+
+It has the following options.
+
+```sh
+$ thanks-dependencies -h
+
+Usage: thanks-dependencies [OPTIONS]
+
+Options:
+  -r, --readme <README>  Path for your README.md [default: ./README.md]
+  -c, --cargo <CARGO>    Path for your Cargo.toml [default: ./Cargo.toml]
+  -t, --title <TITLE>    Title for thanks list [default: "## Thanks for the following dependencies"]
+      --recursive        Whether reading dependencies recursively
+  -h, --help             Print help
+```
+
 ## Thanks for the following dependencies
 ### Dependencies
 - async-recursion(https://github.com/dcchut/async-recursion) ... Recursion for async functions

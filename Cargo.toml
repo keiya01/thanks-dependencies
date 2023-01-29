@@ -2,7 +2,13 @@
 name = "thanks-dependencies"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
 repository = "https://github.com/keiya01/thanks-dependencies"
+authors = ["keiya01 <keiya.s.0210@gmail.com>"]
+
+[[bin]]
+name = "thanks-dependencies"
+path = "src/main.rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
