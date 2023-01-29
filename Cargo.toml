@@ -2,6 +2,7 @@
 name = "thanks-dependencies"
 version = "0.1.0"
 edition = "2021"
+repository = "https://github.com/keiya01/thanks-dependencies"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
