@@ -6,7 +6,7 @@ use clap::Parser;
 use readme::write_to_readme;
 use std::{
     fs::OpenOptions,
-    io::{Read, Result, Write, Seek, SeekFrom},
+    io::{Read, Result, Seek, SeekFrom, Write},
     path::PathBuf,
 };
 
@@ -21,7 +21,11 @@ struct Cli {
     #[arg(short, long, default_value = "./Cargo.toml")]
     cargo: PathBuf,
     /// Title for thanks list.
-    #[arg(short, long, default_value = "## Thanks for the following dependencies")]
+    #[arg(
+        short,
+        long,
+        default_value = "## Thanks for the following dependencies"
+    )]
     title: String,
     /// TODO: Not implemented yet. Whether reading dependencies recursively.
     #[arg(long, default_value_t = false)]
