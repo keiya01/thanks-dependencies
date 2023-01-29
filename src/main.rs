@@ -23,7 +23,7 @@ struct Cli {
     /// Title for thanks list.
     #[arg(short, long, default_value = "## Thanks for the following dependencies")]
     title: String,
-    /// Whether reading dependencies recursively.
+    /// TODO: Not implemented yet. Whether reading dependencies recursively.
     #[arg(long, default_value_t = false)]
     recursive: bool,
 }
