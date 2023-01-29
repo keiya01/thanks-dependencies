@@ -64,12 +64,12 @@ async fn generate_deps_content(deps: &BTreeMap<String, Dependency>, title: Strin
     let label = title.replace(r"# ", "");
     let label = label.replace('#', "");
 
-    println!("===== Start fetching {} =====", label);
+    println!("===== Start fetching {label} =====");
 
     let f = DepsFetcher::new(REGISTRY.to_owned());
     let result = f.fetch_all::<ExpectJson>("/api/v1/crates", names).await;
 
-    println!("===== Finished fetching {} =====", label);
+    println!("===== Finished fetching {label} =====");
 
     let mut contents = vec![title];
     for item in result {
@@ -81,7 +81,7 @@ async fn generate_deps_content(deps: &BTreeMap<String, Dependency>, title: Strin
         }
         .into_string();
         let content = content.replace('\n', " ");
-        contents.push(format!("- {}", content));
+        contents.push(format!("- {content}"));
     }
 
     contents.join("\n")

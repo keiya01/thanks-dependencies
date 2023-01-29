@@ -49,7 +49,7 @@ impl DepsFetcher {
             if concurrency >= Self::MAX_CONCURRENCY {
                 break;
             }
-            println!("Fetching {} ...", dep);
+            println!("Fetching {dep} ...");
             futures.push(
                 self.client
                     .recv_json(surf::get(format!("{}{}/{}", self.registry, path, dep))),

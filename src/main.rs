@@ -6,7 +6,7 @@ use clap::Parser;
 use readme::write_to_readme;
 use std::{
     fs::OpenOptions,
-    io::{Read, Result, Seek, SeekFrom, Write},
+    io::{Read, Result, Seek, Write},
     path::PathBuf,
 };
 
@@ -39,7 +39,7 @@ fn main() -> Result<()> {
     let mut readme = String::new();
     f.read_to_string(&mut readme)?;
 
-    f.seek(SeekFrom::Start(0)).unwrap();
+    f.rewind().unwrap();
 
     let content = futures::executor::block_on(registry::read_content(c.cargo));
     let content = write_to_readme(readme, c.title, content);

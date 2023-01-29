@@ -10,9 +10,9 @@ impl DependencyContent {
             "{}{}{}",
             self.name,
             self.repository
-                .map_or_else(|| "".to_owned(), |r| format!("({})", r)),
+                .map_or_else(|| "".to_owned(), |r| format!("({r})")),
             self.description
-                .map_or_else(|| "".to_owned(), |d| format!(" ... {}", d))
+                .map_or_else(|| "".to_owned(), |d| format!(" ... {d}"))
         )
     }
 }
