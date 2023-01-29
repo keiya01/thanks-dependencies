@@ -1,5 +1,6 @@
 [package]
 name = "thanks-dependencies"
+description = "Generate a dependency list to thank them on README."
 version = "0.1.0"
 edition = "2021"
 license = "MIT"
