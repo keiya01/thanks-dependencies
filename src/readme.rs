@@ -16,7 +16,6 @@ pub fn write_to_readme(readme: String, title: String, content: String) -> String
         }
 
         if is_writing_content {
-            // We decide this line is title when first word is `#`.
             if line == PLACEHOLDER {
                 is_writing_content = false;
             } else {
