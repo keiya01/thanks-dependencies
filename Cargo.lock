@@ -1469,7 +1469,7 @@ dependencies = [
 
 [[package]]
 name = "thanks-dependencies"
-version = "0.1.0"
+version = "0.1.1"
 dependencies = [
  "async-recursion",
  "cargo_toml",
