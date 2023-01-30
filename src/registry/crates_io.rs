@@ -52,13 +52,14 @@ struct ExpectCrateJson {
 #[derive(Serialize, Deserialize)]
 struct ExpectJson {
     #[serde(rename = "crate")]
-    crate_: ExpectCrateJson,
+    crate_: Option<ExpectCrateJson>,
 }
 
 async fn generate_deps_content(deps: &BTreeMap<String, Dependency>, title: String) -> String {
+    let keys: Vec<_> = deps.keys().collect();
     let mut names = VecDeque::new();
-    for name in deps.keys() {
-        names.push_back(name.clone());
+    for name in &keys {
+        names.push_back(name.to_string());
     }
 
     let label = title.replace(r"# ", "");
@@ -72,12 +73,19 @@ async fn generate_deps_content(deps: &BTreeMap<String, Dependency>, title: Strin
     println!("===== Finished fetching {label} =====");
 
     let mut contents = vec![title];
-    for item in result {
-        let item = item.expect("Failed to fetch");
-        let content = DependencyContent {
-            name: item.crate_.name,
-            description: item.crate_.description,
-            repository: item.crate_.repository,
+    for (i, item) in result.iter().enumerate() {
+        let item = item.as_ref().expect("Failed to fetch");
+        let content = match &item.crate_ {
+            Some(crate_) => DependencyContent {
+                name: crate_.name.clone(),
+                description: crate_.description.clone(),
+                repository: crate_.repository.clone(),
+            },
+            None => DependencyContent {
+                name: keys.get(i).expect("Could not find crate name").to_string(),
+                description: None,
+                repository: None,
+            }
         }
         .into_string();
         let content = content.replace('\n', " ");
