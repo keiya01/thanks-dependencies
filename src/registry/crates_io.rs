@@ -56,9 +56,13 @@ struct ExpectJson {
 }
 
 async fn generate_deps_content(deps: &BTreeMap<String, Dependency>, title: String) -> String {
-    let keys: Vec<_> = deps.keys().collect();
     let mut names = VecDeque::new();
-    for name in &keys {
+    for (name, dep) in deps {
+        let detail = dep.detail();
+        let name = match detail {
+            Some(d) if d.package.is_some() => d.package.as_ref().unwrap().to_string(),
+            _ => name.to_string(),
+        };
         names.push_back(name.to_string());
     }
 
@@ -72,6 +76,7 @@ async fn generate_deps_content(deps: &BTreeMap<String, Dependency>, title: Strin
 
     println!("===== Finished fetching {label} =====");
 
+    let keys: Vec<_> = deps.keys().collect();
     let mut contents = vec![title];
     for (i, item) in result.iter().enumerate() {
         let item = item.as_ref().expect("Failed to fetch");
@@ -85,7 +90,7 @@ async fn generate_deps_content(deps: &BTreeMap<String, Dependency>, title: Strin
                 name: keys.get(i).expect("Could not find crate name").to_string(),
                 description: None,
                 repository: None,
-            }
+            },
         }
         .into_string();
         let content = content.replace('\n', " ");
